@@ -1,0 +1,1410 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{miniproject3}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Part 1: Regression, Three
+Ways}\label{part-1-regression-three-ways}
+
+    \subsubsection{\texorpdfstring{We will consider the problem of fitting a
+linear model. Given d-dimensional input data
+\(x^{(1)}, ... , x^{(n)} \in R^d\) with real-valued labels
+\(y^{(1)}, ... , y^{(n)} \in R\), the goal is to find the coefficient
+vector \(a\) that minimizes the sum of the squared errors. The total
+squared error of \(a\) can be written as
+\(f(a) = \sum_{i=1}^{n}f_i(a)\), where
+\(f_i(a) = (a^Tx^{(i)}-y^{(i)})^2\) denotes the squared error of the ith
+data
+point.}{We will consider the problem of fitting a linear model. Given d-dimensional input data x\^{}\{(1)\}, ... , x\^{}\{(n)\} \textbackslash{}in R\^{}d with real-valued labels y\^{}\{(1)\}, ... , y\^{}\{(n)\} \textbackslash{}in R, the goal is to find the coefficient vector a that minimizes the sum of the squared errors. The total squared error of a can be written as f(a) = \textbackslash{}sum\_\{i=1\}\^{}\{n\}f\_i(a), where f\_i(a) = (a\^{}Tx\^{}\{(i)\}-y\^{}\{(i)\})\^{}2 denotes the squared error of the ith data point.}}\label{we-will-consider-the-problem-of-fitting-a-linear-model.-given-d-dimensional-input-data-x1-...-xn-in-rd-with-real-valued-labels-y1-...-yn-in-r-the-goal-is-to-find-the-coefficient-vector-a-that-minimizes-the-sum-of-the-squared-errors.-the-total-squared-error-of-a-can-be-written-as-fa-sum_i1nf_ia-where-f_ia-atxi-yi2-denotes-the-squared-error-of-the-ith-data-point.}
+
+\subsubsection{\texorpdfstring{The data in this problem will be drawn
+from the following linear model. For the training data, we select \(n\)
+data points \(x^{(1)}, ... , x^{(n)}\) , each drawn independently from a
+d-dimensional Gaussian distribution. We then pick the ``true''
+coefficient vector \(a^*\) (again from a d-dimensional Gaussian), and
+give each training point \(x^{(i)}\) a label equal to \((a^*)^Tx^{(i)}\)
+plus some noise (which is drawn from a 1-dimensional Gaussian
+distribution).}{The data in this problem will be drawn from the following linear model. For the training data, we select n data points x\^{}\{(1)\}, ... , x\^{}\{(n)\} , each drawn independently from a d-dimensional Gaussian distribution. We then pick the ``true'' coefficient vector a\^{}* (again from a d-dimensional Gaussian), and give each training point x\^{}\{(i)\} a label equal to (a\^{}*)\^{}Tx\^{}\{(i)\} plus some noise (which is drawn from a 1-dimensional Gaussian distribution).}}\label{the-data-in-this-problem-will-be-drawn-from-the-following-linear-model.-for-the-training-data-we-select-n-data-points-x1-...-xn-each-drawn-independently-from-a-d-dimensional-gaussian-distribution.-we-then-pick-the-true-coefficient-vector-a-again-from-a-d-dimensional-gaussian-and-give-each-training-point-xi-a-label-equal-to-atxi-plus-some-noise-which-is-drawn-from-a-1-dimensional-gaussian-distribution.}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+         \PY{k+kn}{import} \PY{n+nn}{time}
+         \PY{k+kn}{import} \PY{n+nn}{warnings}
+         \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+         \PY{n}{warnings}\PY{o}{.}\PY{n}{filterwarnings}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ignore}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{test\PYZus{}mode} \PY{o}{=} \PY{k+kc}{True}
+\end{Verbatim}
+
+
+    The following Python code will generate the data used in this problem.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{c+c1}{\PYZsh{}generate the data}
+        \PY{n}{d} \PY{o}{=} \PY{l+m+mi}{100}
+        \PY{n}{n} \PY{o}{=} \PY{l+m+mi}{1000}
+        \PY{n}{X} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{normal}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{size} \PY{o}{=} \PY{p}{(}\PY{n}{n}\PY{p}{,}\PY{n}{d}\PY{p}{)}\PY{p}{)}
+        \PY{n}{a\PYZus{}true} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{normal}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{size}\PY{o}{=}\PY{p}{(}\PY{n}{d}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+        \PY{n}{y} \PY{o}{=} \PY{n}{X} \PY{o}{@} \PY{n}{a\PYZus{}true} \PY{o}{+} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{normal}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{,} \PY{n}{size} \PY{o}{=} \PY{p}{(}\PY{n}{n}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsubsection{\texorpdfstring{(a) (4 points) Least-squares regression
+has the closed form solution \(a = (X^TX)^{−1}X^Ty\), which minimizes
+the squared error on the data. (Here \(X\) is the \(n * d\) data matrix
+as in the code above, with one row per data point, and \(y\) is the
+n-vector of their labels.) Solve for \(a\) and report the value of the
+objective function using this value \(a\). For comparison, what is the
+total squared error if you just set a to be the all 0's
+vector?}{(a) (4 points) Least-squares regression has the closed form solution a = (X\^{}TX)\^{}\{−1\}X\^{}Ty, which minimizes the squared error on the data. (Here X is the n * d data matrix as in the code above, with one row per data point, and y is the n-vector of their labels.) Solve for a and report the value of the objective function using this value a. For comparison, what is the total squared error if you just set a to be the all 0's vector?}}\label{a-4-points-least-squares-regression-has-the-closed-form-solution-a-xtx1xty-which-minimizes-the-squared-error-on-the-data.-here-x-is-the-n-d-data-matrix-as-in-the-code-above-with-one-row-per-data-point-and-y-is-the-n-vector-of-their-labels.-solve-for-a-and-report-the-value-of-the-objective-function-using-this-value-a.-for-comparison-what-is-the-total-squared-error-if-you-just-set-a-to-be-the-all-0s-vector}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{a\PYZus{}base} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{inv}\PY{p}{(}\PY{n}{X}\PY{o}{.}\PY{n}{T} \PY{o}{@} \PY{n}{X}\PY{p}{)} \PY{o}{@} \PY{n}{X}\PY{o}{.}\PY{n}{T} \PY{o}{@} \PY{n}{y}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{closed form solution a:}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{a\PYZus{}base}\PY{o}{.}\PY{n}{T}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+closed form solution a:
+ [[-0.51509875  0.99250131 -1.46867565  1.13598337  0.79908287 -0.02364077
+   0.01691246  0.94098754  0.74348091 -0.04285929  0.08618895  1.55551345
+  -0.3432146   1.23853102 -0.5438406   0.74360754  0.36393111  0.2338206
+   2.05374225 -0.11914071 -1.08281022  0.29593696  0.32386183 -0.77804589
+   0.79086835 -0.72052533 -0.57141058 -1.18467397 -1.02547171 -0.60038548
+  -0.19564817  0.62717471  2.39037135 -0.58385574  1.60793572  0.4388885
+   0.67180093 -1.28457237 -1.11422957  0.31876763 -0.83204181  1.84428797
+  -1.65896204 -0.91596145  0.39981459 -0.78432786  0.20337582  1.85883989
+  -0.01559485 -1.3899322   0.98672222 -0.81279179 -0.55776741 -1.49052705
+  -1.56200726  0.31975106  0.57838186  0.54832247 -0.53564545  2.61266987
+  -0.16348811  0.57872959  0.44599973  0.98599784 -0.73969796  1.4463818
+   0.16482718 -1.48536254 -2.19233861  0.21286897  0.43152451  1.00337875
+  -0.63735087 -0.23667168  0.05676579  0.74513979  0.09069635 -1.38709251
+   0.08005417  1.88191582 -2.0291621  -2.30165982  0.00814122  1.12914624
+  -1.17786897 -0.19504806  0.7365764   1.33346577  0.49063491  1.53708008
+   0.8570726  -2.17731143 -0.59706992 -2.40805668 -0.94064189  1.10706143
+  -1.14915536  0.04926027 -1.69380796  0.15400672]]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{k}{def} \PY{n+nf}{MSELoss}\PY{p}{(}\PY{n}{y1}\PY{p}{,} \PY{n}{y2}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{(}\PY{n}{y1}\PY{o}{\PYZhy{}}\PY{n}{y2}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{y1} \PY{o}{=} \PY{n}{X} \PY{o}{@} \PY{n}{a\PYZus{}base}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{value of the objective function using value a = }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{MSELoss}\PY{p}{(}\PY{n}{y1}\PY{p}{,} \PY{n}{y}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{value of the objective function seting a to zero = }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{MSELoss}\PY{p}{(}\PY{n}{y}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+value of the objective function using value a =  214.10416812826935
+value of the objective function seting a to zero =  110354.52859383206
+
+    \end{Verbatim}
+
+     The squared error of the solving \(a\) is far more less than all 0's
+vector. It means that the \(a_{base}\) we get is correct. 
+
+    \subsubsection{\texorpdfstring{(b) (6 points) In this part, you will
+solve the same problem via gradient descent on the squared-error
+objective function \(f(a) = \sum_{i=1}^{n}{f_i(a)}\). Recall that the
+gradient of a sum of functions is the sum of their gradients. Given a
+point \(a_t\), what is the gradient of f at
+\(a_t\)?}{(b) (6 points) In this part, you will solve the same problem via gradient descent on the squared-error objective function f(a) = \textbackslash{}sum\_\{i=1\}\^{}\{n\}\{f\_i(a)\}. Recall that the gradient of a sum of functions is the sum of their gradients. Given a point a\_t, what is the gradient of f at a\_t?}}\label{b-6-points-in-this-part-you-will-solve-the-same-problem-via-gradient-descent-on-the-squared-error-objective-function-fa-sum_i1nf_ia.-recall-that-the-gradient-of-a-sum-of-functions-is-the-sum-of-their-gradients.-given-a-point-a_t-what-is-the-gradient-of-f-at-a_t}
+
+    \begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{1}
+\item
+\end{enumerate}
+
+    \[\because Xa = \left[\begin{matrix}
+   \sum_\limits{i = 1}^dx_{1i}a_i \\
+   \sum_\limits{i = 1}^dx_{2i}a_i \\
+   \vdots \\
+   \sum_\limits{i = 1}^dx_{ni}a_i \\
+\end{matrix}\right]\]
+
+\[\therefore \frac{\partial Xa}{\partial a_t} = \left[\begin{matrix}
+    x_{1t} \\
+    x_{2t} \\
+    \vdots \\
+    x_{nt} \\
+\end{matrix}\right]\]
+
+\[\therefore \frac{\partial f(a)}{\partial a_t} 
+= \frac{\partial (Xa - y)^T(Xa - y)}{\partial a_t}
+=  2(Xa - y)^T\left[\begin{matrix}
+    x_{1t} \\
+    x_{2t} \\
+    \vdots \\
+    x_{nt} \\
+\end{matrix}\right]\]
+
+    \subsubsection{\texorpdfstring{Now use gradient descent to find a
+coefficient vector \(a\) that approximately minimizes the least squares
+objective function over the data. Run gradient descent three times, once
+with each of the step sizes \(0.00005\), \(0.0005\), and \(0.0007\). You
+should initialize \(a\) to be the all-zero vector for all three runs.
+Plot the objective function value for 20 iterations for all 3 step sizes
+on the same graph. Comment in 3-4 sentences on how the step size can
+affect the convergence of gradient descent (feel free to experiment with
+other step sizes). Also report the step size that had the best final
+objective function value and the corresponding objective function
+value.}{Now use gradient descent to find a coefficient vector a that approximately minimizes the least squares objective function over the data. Run gradient descent three times, once with each of the step sizes 0.00005, 0.0005, and 0.0007. You should initialize a to be the all-zero vector for all three runs. Plot the objective function value for 20 iterations for all 3 step sizes on the same graph. Comment in 3-4 sentences on how the step size can affect the convergence of gradient descent (feel free to experiment with other step sizes). Also report the step size that had the best final objective function value and the corresponding objective function value.}}\label{now-use-gradient-descent-to-find-a-coefficient-vector-a-that-approximately-minimizes-the-least-squares-objective-function-over-the-data.-run-gradient-descent-three-times-once-with-each-of-the-step-sizes-0.00005-0.0005-and-0.0007.-you-should-initialize-a-to-be-the-all-zero-vector-for-all-three-runs.-plot-the-objective-function-value-for-20-iterations-for-all-3-step-sizes-on-the-same-graph.-comment-in-3-4-sentences-on-how-the-step-size-can-affect-the-convergence-of-gradient-descent-feel-free-to-experiment-with-other-step-sizes.-also-report-the-step-size-that-had-the-best-final-objective-function-value-and-the-corresponding-objective-function-value.}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{c+c1}{\PYZsh{}index from 0 to n\PYZhy{}1}
+        \PY{c+c1}{\PYZsh{}gradient without l2}
+        \PY{k}{def} \PY{n+nf}{getGradient}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{a}\PY{p}{,} \PY{n}{index}\PY{p}{,} \PY{n}{lambda\PYZus{}value} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{}gradient below is for index \PYZhy{}\PYZgt{} a\PYZus{}t}
+            \PY{c+c1}{\PYZsh{}gradient = 2 * (X@a  \PYZhy{} y).T @ (X[:,index])}
+            \PY{c+c1}{\PYZsh{}now change into index \PYZhy{}\PYZgt{} x\PYZus{}i}
+            \PY{n}{gradient} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{2} \PY{o}{*} \PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{n}{index}\PY{p}{]}\PY{n+nd}{@a}\PY{o}{\PYZhy{}}\PY{n}{y}\PY{p}{[}\PY{n}{index}\PY{p}{]}\PY{p}{)} \PY{o}{*} \PY{n}{X}\PY{p}{[}\PY{n}{index}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)} \PY{o}{+} \PY{p}{(}\PY{l+m+mi}{2} \PY{o}{*} \PY{n}{lambda\PYZus{}value} \PY{o}{*} \PY{n}{a}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+            \PY{k}{return} \PY{n}{gradient}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+        
+        \PY{k}{def} \PY{n+nf}{GDTrain}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{step\PYZus{}size}\PY{p}{,} \PY{n}{train\PYZus{}step}\PY{p}{,} \PY{n}{metric} \PY{o}{=} \PY{n}{MSELoss}\PY{p}{,} \PY{n}{lambda\PYZus{}value} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{,} \PY{n}{evaluate}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{} extra dimension = 1 of a is necessary!!!}
+            \PY{c+c1}{\PYZsh{} nasty broadcase algirhtm}
+            \PY{n}{a} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+            \PY{n}{obj\PYZus{}value} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{train\PYZus{}step}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}
+            \PY{n}{test\PYZus{}error} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{train\PYZus{}step}\PY{o}{/}\PY{o}{/}\PY{l+m+mi}{100} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)}
+            \PY{n}{obj\PYZus{}value}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{n}{metric}\PY{p}{(}\PY{n}{X} \PY{o}{@} \PY{n}{a}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+            \PY{k}{if} \PY{n}{evaluate}\PY{p}{:}
+                \PY{k}{global} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}test}
+                \PY{n}{test\PYZus{}error}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{n}{metric}\PY{p}{(}\PY{n}{X\PYZus{}test} \PY{o}{@} \PY{n}{a}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{)}
+            \PY{k}{for} \PY{n}{iters} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{train\PYZus{}step}\PY{p}{)}\PY{p}{:}
+                \PY{n}{gds} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+                \PY{k}{for} \PY{n}{index} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{X}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{gds} \PY{o}{+}\PY{o}{=} \PY{n}{getGradient}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{a}\PY{p}{,} \PY{n}{index}\PY{p}{,} \PY{n}{lambda\PYZus{}value}\PY{p}{)}
+                \PY{c+c1}{\PYZsh{}update a with gradient}
+                \PY{n}{a} \PY{o}{=} \PY{n}{a} \PY{o}{\PYZhy{}} \PY{n}{step\PYZus{}size} \PY{o}{*} \PY{n}{gds}
+                \PY{n}{obj\PYZus{}value}\PY{p}{[}\PY{n}{iters}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{n}{metric}\PY{p}{(}\PY{n}{X} \PY{o}{@} \PY{n}{a}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+                \PY{k}{if} \PY{n}{evaluate}\PY{p}{:}
+                    \PY{k}{if} \PY{p}{(}\PY{n}{iters}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)} \PY{o}{\PYZpc{}} \PY{l+m+mi}{100} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+                        \PY{n}{test\PYZus{}error}\PY{p}{[}\PY{p}{(}\PY{n}{iters}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{/}\PY{o}{/}\PY{l+m+mi}{100}\PY{p}{]} \PY{o}{=} \PY{n}{metric}\PY{p}{(}\PY{n}{X\PYZus{}test} \PY{o}{@} \PY{n}{a}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{)}
+            \PY{k}{if} \PY{n}{evaluate}\PY{p}{:}
+                \PY{k}{return} \PY{n}{obj\PYZus{}value}\PY{p}{,} \PY{n}{test\PYZus{}error}
+            \PY{k}{else}\PY{p}{:}
+                \PY{k}{return} \PY{n}{obj\PYZus{}value}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{train\PYZus{}step} \PY{o}{=} \PY{l+m+mi}{20}
+        \PY{n}{step\PYZus{}size\PYZus{}list} \PY{o}{=}  \PY{p}{[}\PY{l+m+mf}{0.00005}\PY{p}{,}\PY{l+m+mf}{0.0005}\PY{p}{,}\PY{l+m+mf}{0.0007}\PY{p}{]}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{3}\PY{o}{*}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{step\PYZus{}size\PYZus{}list}\PY{p}{)}\PY{o}{+}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{,}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{step\PYZus{}size\PYZus{}list}\PY{p}{)}\PY{o}{+}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+        
+        \PY{n}{running\PYZus{}time} \PY{o}{=} \PY{l+m+mi}{0}
+        
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{step\PYZus{}size\PYZus{}list}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+            \PY{n}{running\PYZus{}start} \PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{clock}\PY{p}{(}\PY{p}{)}
+            \PY{n}{obj\PYZus{}value} \PY{o}{=} \PY{n}{GDTrain}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{step\PYZus{}size\PYZus{}list}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{train\PYZus{}step}\PY{p}{,} \PY{n}{evaluate}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+            \PY{n}{running\PYZus{}time} \PY{o}{+}\PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{clock}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{running\PYZus{}start}
+            \PY{n}{x\PYZus{}index} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{train\PYZus{}step}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{n+nb}{len}\PY{p}{(}\PY{n}{step\PYZus{}size\PYZus{}list}\PY{p}{)}\PY{p}{,}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{step size = }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{step\PYZus{}size\PYZus{}list}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{iteraion}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{objctive function value}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x\PYZus{}index}\PY{p}{,} \PY{n}{obj\PYZus{}value}\PY{p}{)}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{final objective values of step size = }\PY{l+s+si}{\PYZpc{}lf}\PY{l+s+s1}{ is: }\PY{l+s+si}{\PYZpc{}lf}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{step\PYZus{}size\PYZus{}list}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{obj\PYZus{}value}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{average running time =}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{running\PYZus{}time} \PY{o}{/} \PY{n+nb}{len}\PY{p}{(}\PY{n}{step\PYZus{}size\PYZus{}list}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{s}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+final objective values of step size = 0.000050 is: 2996.739988
+final objective values of step size = 0.000500 is: 214.104206
+final objective values of step size = 0.000700 is: 37456558.603408
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_15_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+average running time = 0.3547966303047576 s
+
+    \end{Verbatim}
+
+    With the increase of step size, the convergence speed becomes faster,
+but when the step size is too large, the objective function will
+oscillate around the local optimum, or even diverge. 0.0005 is the best
+step size and the final objective values is similar to the closed
+solution's.
+
+    \subsubsection{\texorpdfstring{(c) (6 points) In this part you will run
+stochastic gradient descent to solve the same problem. Recall that in
+stochastic gradient descent, you pick one datapoint at a time, say
+\((x^{(i)}, y^{(i)})\), and update your current value of \(a\) according
+to the gradient of
+\(f_i(a) = (a^Tx^{(i)}-y^{(i)})^2\).}{(c) (6 points) In this part you will run stochastic gradient descent to solve the same problem. Recall that in stochastic gradient descent, you pick one datapoint at a time, say (x\^{}\{(i)\}, y\^{}\{(i)\}), and update your current value of a according to the gradient of f\_i(a) = (a\^{}Tx\^{}\{(i)\}-y\^{}\{(i)\})\^{}2.}}\label{c-6-points-in-this-part-you-will-run-stochastic-gradient-descent-to-solve-the-same-problem.-recall-that-in-stochastic-gradient-descent-you-pick-one-datapoint-at-a-time-say-xi-yi-and-update-your-current-value-of-a-according-to-the-gradient-of-f_ia-atxi-yi2.}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{k}{def} \PY{n+nf}{SGDTrain}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{step\PYZus{}size}\PY{p}{,} \PY{n}{iters}\PY{p}{,} \PY{n}{metric} \PY{o}{=} \PY{n}{MSELoss}\PY{p}{,}\PY{n}{batch\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{evaluate} \PY{o}{=} \PY{k+kc}{False}\PY{p}{,} \PY{n}{lambda\PYZus{}value} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{,} \PY{n}{random\PYZus{}radius} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{:}
+            \PY{n}{a} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{uniform}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{random\PYZus{}radius}\PY{p}{,} \PY{n}{size} \PY{o}{=} \PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+            \PY{n}{obj\PYZus{}value} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{iters}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}
+            \PY{n}{test\PYZus{}error} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{iters}\PY{o}{/}\PY{o}{/}\PY{l+m+mi}{100} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)}
+            \PY{n}{obj\PYZus{}value}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{n}{metric}\PY{p}{(}\PY{n}{X} \PY{o}{@} \PY{n}{a}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+            \PY{k}{if} \PY{n}{evaluate}\PY{p}{:}
+                \PY{k}{global} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}test}
+                \PY{n}{test\PYZus{}error}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{n}{metric}\PY{p}{(}\PY{n}{X\PYZus{}test} \PY{o}{@} \PY{n}{a}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{)}
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{iters}\PY{p}{)}\PY{p}{:}
+                \PY{n}{gd} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+                \PY{n}{indexs} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{X}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+                \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{shuffle}\PY{p}{(}\PY{n}{indexs}\PY{p}{)}
+                \PY{k}{for} \PY{n}{index\PYZus{}i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{batch\PYZus{}size}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{index} \PY{o}{=} \PY{n}{indexs}\PY{p}{[}\PY{n}{index\PYZus{}i}\PY{p}{]}
+                    \PY{n}{gd} \PY{o}{+}\PY{o}{=} \PY{n}{getGradient}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{a}\PY{p}{,} \PY{n}{index}\PY{p}{,} \PY{n}{lambda\PYZus{}value}\PY{p}{)}
+                \PY{c+c1}{\PYZsh{}update a with gradient}
+                \PY{n}{a} \PY{o}{=} \PY{n}{a} \PY{o}{\PYZhy{}} \PY{n}{step\PYZus{}size} \PY{o}{*} \PY{n}{gd}
+                \PY{n}{obj\PYZus{}value}\PY{p}{[}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{n}{metric}\PY{p}{(}\PY{n}{X} \PY{o}{@} \PY{n}{a}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+                \PY{k}{if} \PY{n}{evaluate} \PY{o+ow}{and} \PY{p}{(}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)} \PY{o}{\PYZpc{}} \PY{l+m+mi}{100} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+                    \PY{n}{test\PYZus{}error}\PY{p}{[}\PY{p}{(}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{/}\PY{o}{/}\PY{l+m+mi}{100}\PY{p}{]} \PY{o}{=} \PY{n}{metric}\PY{p}{(}\PY{n}{X\PYZus{}test} \PY{o}{@} \PY{n}{a}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{)}
+            \PY{k}{if} \PY{n}{evaluate}\PY{p}{:}
+                \PY{k}{return} \PY{n}{obj\PYZus{}value}\PY{p}{,} \PY{n}{test\PYZus{}error}
+            \PY{k}{else}\PY{p}{:}
+                \PY{k}{return} \PY{n}{obj\PYZus{}value}
+\end{Verbatim}
+
+
+    \subsubsection{\texorpdfstring{Run stochastic gradient descent using
+step sizes \({0.0005, 0.005, 0.01}\) and 1000 iterations. Plot the
+objective function value vs. the iteration number for all 3 step sizes
+on the same graph. Comment 3-4 sentences on how the step size can affect
+the convergence of stochastic gradient descent and how it compares to
+gradient descent. Compare the performance of the two methods. How do the
+best final objective function values compare? How many times does each
+algorithm use each data point? Also report the step size that had the
+best final objective function value and the corresponding objective
+function
+value.}{Run stochastic gradient descent using step sizes \{0.0005, 0.005, 0.01\} and 1000 iterations. Plot the objective function value vs. the iteration number for all 3 step sizes on the same graph. Comment 3-4 sentences on how the step size can affect the convergence of stochastic gradient descent and how it compares to gradient descent. Compare the performance of the two methods. How do the best final objective function values compare? How many times does each algorithm use each data point? Also report the step size that had the best final objective function value and the corresponding objective function value.}}\label{run-stochastic-gradient-descent-using-step-sizes-0.0005-0.005-0.01-and-1000-iterations.-plot-the-objective-function-value-vs.-the-iteration-number-for-all-3-step-sizes-on-the-same-graph.-comment-3-4-sentences-on-how-the-step-size-can-affect-the-convergence-of-stochastic-gradient-descent-and-how-it-compares-to-gradient-descent.-compare-the-performance-of-the-two-methods.-how-do-the-best-final-objective-function-values-compare-how-many-times-does-each-algorithm-use-each-data-point-also-report-the-step-size-that-had-the-best-final-objective-function-value-and-the-corresponding-objective-function-value.}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{train\PYZus{}iter} \PY{o}{=} \PY{l+m+mi}{1000}
+        \PY{n}{step\PYZus{}size\PYZus{}list} \PY{o}{=}  \PY{p}{[}\PY{l+m+mf}{0.0005}\PY{p}{,}\PY{l+m+mf}{0.005}\PY{p}{,}\PY{l+m+mf}{0.01}\PY{p}{]}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{3}\PY{o}{*}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{step\PYZus{}size\PYZus{}list}\PY{p}{)}\PY{o}{+}\PY{l+m+mf}{3.5}\PY{p}{)}\PY{p}{,}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{step\PYZus{}size\PYZus{}list}\PY{p}{)}\PY{o}{+}\PY{l+m+mf}{3.5}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+        
+        \PY{n}{running\PYZus{}time} \PY{o}{=} \PY{l+m+mi}{0}
+        
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{step\PYZus{}size\PYZus{}list}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+            \PY{n}{running\PYZus{}start} \PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{clock}\PY{p}{(}\PY{p}{)}
+            \PY{n}{obj\PYZus{}value} \PY{o}{=} \PY{n}{SGDTrain}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{step\PYZus{}size\PYZus{}list}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{train\PYZus{}iter}\PY{p}{)}
+            \PY{n}{running\PYZus{}time} \PY{o}{+}\PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{clock}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{running\PYZus{}start}
+            \PY{n}{x\PYZus{}index} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{train\PYZus{}iter}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{n+nb}{len}\PY{p}{(}\PY{n}{step\PYZus{}size\PYZus{}list}\PY{p}{)}\PY{p}{,}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{step size = }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{step\PYZus{}size\PYZus{}list}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{iteraion}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{objctive function value}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x\PYZus{}index}\PY{p}{,} \PY{n}{obj\PYZus{}value}\PY{p}{)}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{final objective values of step size = }\PY{l+s+si}{\PYZpc{}lf}\PY{l+s+s1}{ is: }\PY{l+s+si}{\PYZpc{}lf}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{step\PYZus{}size\PYZus{}list}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{obj\PYZus{}value}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{average running time =}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{running\PYZus{}time} \PY{o}{/} \PY{n+nb}{len}\PY{p}{(}\PY{n}{step\PYZus{}size\PYZus{}list}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{s}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+final objective values of step size = 0.000500 is: 18364.418942
+final objective values of step size = 0.005000 is: 504.889355
+final objective values of step size = 0.010000 is: 227013.636890
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_20_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+average running time = 0.40248140482380174 s
+
+    \end{Verbatim}
+
+    Similar to the (b), the larger step size, the faster convergence speed.
+Nevertheless, when the step size becomes too large, the objective
+function will oscillate around the local optimum, or even diverge. The
+objective function values change roughly by using SGD. The overall
+tendency is similar to the GD one that uses a large step size. The
+efficiency of SGD is much higher than GD. We can see that SGD converges
+time is only 1/5 times of GD's. On the other hand, the best final
+objective function values of SGD is larger than that in GD i.e. 458.2807
+vs 217.0854.
+
+\[T_{GD}  = \frac{average time}{20 (iterations) * 1000 (data point/iteration)}  = 7.311e-06 s\]
+
+\[T_{SGD} = \frac{average time}{1000 (iterations) * 1 (data point/iteration)}   = 0.3089e-06 s\]
+
+Usng step size 0.005 in SGD we can get the optimal final objective
+function values.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{c+c1}{\PYZsh{}using another metric, y2 is the real ture output}
+         \PY{k}{def} \PY{n+nf}{NormMSELoss}\PY{p}{(}\PY{n}{y1}\PY{p}{,} \PY{n}{y2}\PY{p}{)}\PY{p}{:}
+             \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{(}\PY{n}{y1} \PY{o}{\PYZhy{}} \PY{n}{y2}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{y2}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{train\PYZus{}iter} \PY{o}{=} \PY{l+m+mi}{1000}
+         \PY{n}{step\PYZus{}size\PYZus{}list} \PY{o}{=}  \PY{p}{[}\PY{l+m+mf}{0.0005}\PY{p}{,}\PY{l+m+mf}{0.005}\PY{p}{,}\PY{l+m+mf}{0.01}\PY{p}{]}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{3}\PY{o}{*}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{step\PYZus{}size\PYZus{}list}\PY{p}{)}\PY{o}{+}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{step\PYZus{}size\PYZus{}list}\PY{p}{)}\PY{o}{+}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{running\PYZus{}time} \PY{o}{=} \PY{l+m+mi}{0}
+         
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{step\PYZus{}size\PYZus{}list}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+             \PY{n}{running\PYZus{}start} \PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{clock}\PY{p}{(}\PY{p}{)}
+             \PY{n}{obj\PYZus{}value} \PY{o}{=} \PY{n}{SGDTrain}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{step\PYZus{}size\PYZus{}list}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{train\PYZus{}iter}\PY{p}{,} \PY{n}{NormMSELoss}\PY{p}{)}
+             \PY{n}{running\PYZus{}time} \PY{o}{+}\PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{clock}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{running\PYZus{}start}
+             \PY{n}{x\PYZus{}index} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{train\PYZus{}iter}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{n+nb}{len}\PY{p}{(}\PY{n}{step\PYZus{}size\PYZus{}list}\PY{p}{)}\PY{p}{,}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{step size = }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{step\PYZus{}size\PYZus{}list}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{iteraion}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{objctive function value}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{ylim}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x\PYZus{}index}\PY{p}{,} \PY{n}{obj\PYZus{}value}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{final objective values of step size = }\PY{l+s+si}{\PYZpc{}lf}\PY{l+s+s1}{ is: }\PY{l+s+si}{\PYZpc{}lf}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{step\PYZus{}size\PYZus{}list}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{obj\PYZus{}value}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+             
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{average running time =}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{running\PYZus{}time} \PY{o}{/} \PY{n+nb}{len}\PY{p}{(}\PY{n}{step\PYZus{}size\PYZus{}list}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{s}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+final objective values of step size = 0.000500 is: 0.398331
+final objective values of step size = 0.005000 is: 0.065505
+final objective values of step size = 0.010000 is: 1.131237
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_23_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+average running time = 0.4728396436541451 s
+
+    \end{Verbatim}
+
+    \section{Part 2}\label{part-2}
+
+\subsubsection{\texorpdfstring{In the previous problem, the number of
+data points was much larger than the number of dimensions and hence we
+did not worry about generalization. (Feel free to check that the
+coefficient vector \(a\) that you computed accurately labels new
+datapoints drawn from the same distribution.) We will now consider the
+setting where \(d = n\), and examine the test error along with the
+training error. Use the following Python code for generating the
+training data and test
+data.}{In the previous problem, the number of data points was much larger than the number of dimensions and hence we did not worry about generalization. (Feel free to check that the coefficient vector a that you computed accurately labels new datapoints drawn from the same distribution.) We will now consider the setting where d = n, and examine the test error along with the training error. Use the following Python code for generating the training data and test data.}}\label{in-the-previous-problem-the-number-of-data-points-was-much-larger-than-the-number-of-dimensions-and-hence-we-did-not-worry-about-generalization.-feel-free-to-check-that-the-coefficient-vector-a-that-you-computed-accurately-labels-new-datapoints-drawn-from-the-same-distribution.-we-will-now-consider-the-setting-where-d-n-and-examine-the-test-error-along-with-the-training-error.-use-the-following-python-code-for-generating-the-training-data-and-test-data.}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{c+c1}{\PYZsh{}initialize variable to get the avg error}
+         \PY{n}{train\PYZus{}n} \PY{o}{=} \PY{l+m+mi}{100}
+         \PY{n}{test\PYZus{}n} \PY{o}{=} \PY{l+m+mi}{1000}
+         \PY{n}{d} \PY{o}{=} \PY{l+m+mi}{100}
+         \PY{n}{X\PYZus{}train} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{normal}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{p}{(}\PY{n}{train\PYZus{}n}\PY{p}{,}\PY{n}{d}\PY{p}{)}\PY{p}{)}
+         \PY{n}{a\PYZus{}true} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{normal}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{p}{(}\PY{n}{d}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+         \PY{n}{y\PYZus{}train} \PY{o}{=} \PY{n}{X\PYZus{}train}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{a\PYZus{}true}\PY{p}{)} \PY{o}{+} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{normal}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mf}{0.5}\PY{p}{,}\PY{n}{size}\PY{o}{=}\PY{p}{(}\PY{n}{train\PYZus{}n}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+         \PY{n}{X\PYZus{}test} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{normal}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{p}{(}\PY{n}{test\PYZus{}n}\PY{p}{,}\PY{n}{d}\PY{p}{)}\PY{p}{)}
+         \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{X\PYZus{}test}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{a\PYZus{}true}\PY{p}{)} \PY{o}{+} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{normal}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mf}{0.5}\PY{p}{,}\PY{n}{size}\PY{o}{=}\PY{p}{(}\PY{n}{test\PYZus{}n}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+         
+         \PY{k}{def} \PY{n+nf}{init}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+             \PY{k}{global} \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{a\PYZus{}true}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}test}
+             \PY{n}{X\PYZus{}train} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{normal}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{p}{(}\PY{n}{train\PYZus{}n}\PY{p}{,}\PY{n}{d}\PY{p}{)}\PY{p}{)}
+             \PY{n}{a\PYZus{}true} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{normal}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{p}{(}\PY{n}{d}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+             \PY{n}{y\PYZus{}train} \PY{o}{=} \PY{n}{X\PYZus{}train}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{a\PYZus{}true}\PY{p}{)} \PY{o}{+} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{normal}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mf}{0.5}\PY{p}{,}\PY{n}{size}\PY{o}{=}\PY{p}{(}\PY{n}{train\PYZus{}n}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+             \PY{n}{X\PYZus{}test} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{normal}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{p}{(}\PY{n}{test\PYZus{}n}\PY{p}{,}\PY{n}{d}\PY{p}{)}\PY{p}{)}
+             \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{X\PYZus{}test}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{a\PYZus{}true}\PY{p}{)} \PY{o}{+} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{normal}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mf}{0.5}\PY{p}{,}\PY{n}{size}\PY{o}{=}\PY{p}{(}\PY{n}{test\PYZus{}n}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsubsection{\texorpdfstring{(a) (2 points) We will first setup a
+baseline, by finding the test error of the linear regression solution
+\(a=X^{-1}y\) without any regularization. This is the closed-form
+solution for the minimizer of the objective function \(f(a)\). (Note the
+formula is simpler than in 1(a) because now \(X\) is square.) Report the
+training error and test error of this approach, averaged over 10 trials.
+For better interpretability, report the normalized test error
+\(\hat{f}(a)\) rather than the value of the objective function \(f(a)\),
+where by definition
+\[ \hat{f}(a) = \frac{||Xa-y||_2}{||y||_2}　\]}{(a) (2 points) We will first setup a baseline, by finding the test error of the linear regression solution a=X\^{}\{-1\}y without any regularization. This is the closed-form solution for the minimizer of the objective function f(a). (Note the formula is simpler than in 1(a) because now X is square.) Report the training error and test error of this approach, averaged over 10 trials. For better interpretability, report the normalized test error \textbackslash{}hat\{f\}(a) rather than the value of the objective function f(a), where by definition  \textbackslash{}hat\{f\}(a) = \textbackslash{}frac\{\textbar{}\textbar{}Xa-y\textbar{}\textbar{}\_2\}\{\textbar{}\textbar{}y\textbar{}\textbar{}\_2\}　}}\label{a-2-points-we-will-first-setup-a-baseline-by-finding-the-test-error-of-the-linear-regression-solution-ax-1y-without-any-regularization.-this-is-the-closed-form-solution-for-the-minimizer-of-the-objective-function-fa.-note-the-formula-is-simpler-than-in-1a-because-now-x-is-square.-report-the-training-error-and-test-error-of-this-approach-averaged-over-10-trials.-for-better-interpretability-report-the-normalized-test-error-hatfa-rather-than-the-value-of-the-objective-function-fa-where-by-definition-hatfa-fracxa-y_2y_2}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{trial\PYZus{}times} \PY{o}{=} \PY{l+m+mi}{100}
+         \PY{n}{training\PYZus{}error\PYZus{}base1} \PY{o}{=} \PY{l+m+mi}{0}
+         \PY{n}{test\PYZus{}error\PYZus{}base1} \PY{o}{=} \PY{l+m+mi}{0}
+         
+         \PY{k}{for} \PY{n}{\PYZus{}} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{trial\PYZus{}times}\PY{p}{)}\PY{p}{:}
+             \PY{n}{init}\PY{p}{(}\PY{p}{)}
+             \PY{n}{a\PYZus{}base} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{inv}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{)} \PY{o}{@} \PY{n}{y\PYZus{}train}
+             \PY{n}{training\PYZus{}error\PYZus{}base1} \PY{o}{+}\PY{o}{=} \PY{n}{NormMSELoss}\PY{p}{(}\PY{n}{X\PYZus{}train} \PY{o}{@} \PY{n}{a\PYZus{}base}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+             \PY{n}{test\PYZus{}error\PYZus{}base1} \PY{o}{+}\PY{o}{=} \PY{n}{NormMSELoss}\PY{p}{(}\PY{n}{X\PYZus{}test} \PY{o}{@} \PY{n}{a\PYZus{}base}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{)}
+         
+         \PY{n}{training\PYZus{}error\PYZus{}base1} \PY{o}{/}\PY{o}{=} \PY{n}{trial\PYZus{}times}
+         \PY{n}{test\PYZus{}error\PYZus{}base1} \PY{o}{/}\PY{o}{=} \PY{n}{trial\PYZus{}times}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{training error = }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{training\PYZus{}error\PYZus{}base1}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{test error = }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{test\PYZus{}error\PYZus{}base1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+training error =  3.957985496934647e-14
+test error =  1.745062485643682
+
+    \end{Verbatim}
+
+    We can see that the test error is much larger than training error, this
+means we encounter overfitting problem when the train sample size is
+much more indigent than test sample size.
+
+    \subsubsection{\texorpdfstring{(b) (5 points) We will now examine
+\(l_2\) regularization as a means to prevent overfitting. The \(l_2\)
+regularized objective function is given by the following
+expression:}{(b) (5 points) We will now examine l\_2 regularization as a means to prevent overfitting. The l\_2 regularized objective function is given by the following expression:}}\label{b-5-points-we-will-now-examine-l_2-regularization-as-a-means-to-prevent-overfitting.-the-l_2-regularized-objective-function-is-given-by-the-following-expression}
+
+\[\sum_{i=1}^m{(a^Tx^{(i)}-y^{(i)})^2+\lambda ||a||^2_2}\]
+
+\subsubsection{\texorpdfstring{This has a closed-form solution
+\(a=(X^TX+\lambda I)^{-1}X^Ty\). Using this closed-form solution,
+present a plot of the normalized training error and normalized test
+error \(\hat{f}(a)\) for
+\(\lambda = {0.0005, 0.005, 0.05, 0.5, 5, 50, 500}\). As before, you
+should average over 10 trials. Discuss the characteristics of your plot,
+and also compare it to your answer to
+(a).}{This has a closed-form solution a=(X\^{}TX+\textbackslash{}lambda I)\^{}\{-1\}X\^{}Ty. Using this closed-form solution, present a plot of the normalized training error and normalized test error \textbackslash{}hat\{f\}(a) for \textbackslash{}lambda = \{0.0005, 0.005, 0.05, 0.5, 5, 50, 500\}. As before, you should average over 10 trials. Discuss the characteristics of your plot, and also compare it to your answer to (a).}}\label{this-has-a-closed-form-solution-axtxlambda-i-1xty.-using-this-closed-form-solution-present-a-plot-of-the-normalized-training-error-and-normalized-test-error-hatfa-for-lambda-0.0005-0.005-0.05-0.5-5-50-500.-as-before-you-should-average-over-10-trials.-discuss-the-characteristics-of-your-plot-and-also-compare-it-to-your-answer-to-a.}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{trial\PYZus{}times} \PY{o}{=} \PY{l+m+mi}{100}
+         \PY{n}{lambda\PYZus{}list} \PY{o}{=} \PY{p}{[}\PY{l+m+mf}{0.00005}\PY{p}{,} \PY{l+m+mf}{0.0005}\PY{p}{,}\PY{l+m+mf}{0.005}\PY{p}{,}\PY{l+m+mf}{0.05}\PY{p}{,}\PY{l+m+mf}{0.5}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{50}\PY{p}{,}\PY{l+m+mi}{500}\PY{p}{]}
+         \PY{n}{training\PYZus{}error\PYZus{}base2} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{test\PYZus{}error\PYZus{}base2} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{|lambda|training error|test error|}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{lambda\PYZus{}list}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+             \PY{n}{training\PYZus{}error} \PY{o}{=} \PY{l+m+mi}{0}
+             \PY{n}{test\PYZus{}error} \PY{o}{=} \PY{l+m+mi}{0}
+             \PY{n}{a\PYZus{}base} \PY{o}{=} \PY{l+m+mi}{0}
+             \PY{k}{for} \PY{n}{\PYZus{}} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{trial\PYZus{}times}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{init}\PY{p}{(}\PY{p}{)}
+                 \PY{n}{a\PYZus{}base} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{inv}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{o}{.}\PY{n}{T} \PY{o}{@} \PY{n}{X\PYZus{}train} \PY{o}{+} \PY{n}{lambda\PYZus{}list}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{eye}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{n+nd}{@X\PYZus{}train}\PY{o}{.}\PY{n}{T}\PY{n+nd}{@y\PYZus{}train}
+                 \PY{n}{training\PYZus{}error} \PY{o}{+}\PY{o}{=} \PY{n}{NormMSELoss}\PY{p}{(}\PY{n}{X\PYZus{}train} \PY{o}{@} \PY{n}{a\PYZus{}base}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+                 \PY{n}{test\PYZus{}error} \PY{o}{+}\PY{o}{=} \PY{n}{NormMSELoss}\PY{p}{(}\PY{n}{X\PYZus{}test} \PY{o}{@} \PY{n}{a\PYZus{}base}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{)}
+             
+             \PY{n}{training\PYZus{}error\PYZus{}base2}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{training\PYZus{}error}\PY{o}{/}\PY{n}{trial\PYZus{}times}\PY{p}{)}
+             \PY{n}{test\PYZus{}error\PYZus{}base2}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{test\PYZus{}error}\PY{o}{/}\PY{n}{trial\PYZus{}times}\PY{p}{)}
+             
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{|}\PY{l+s+si}{\PYZpc{}6.4g}\PY{l+s+s1}{|      }\PY{l+s+si}{\PYZpc{}6lf}\PY{l+s+s1}{|  }\PY{l+s+si}{\PYZpc{}8.5lf}\PY{l+s+s1}{|}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}}\PY{p}{(}\PY{n}{lambda\PYZus{}list}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{training\PYZus{}error\PYZus{}base2}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,}\PY{n}{test\PYZus{}error\PYZus{}base2}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+             
+         \PY{c+c1}{\PYZsh{}construct error dictionary}
+         \PY{n}{training\PYZus{}error\PYZus{}base\PYZus{}dic} \PY{o}{=} \PY{n+nb}{dict}\PY{p}{(}\PY{n+nb}{zip}\PY{p}{(}\PY{n}{lambda\PYZus{}list}\PY{p}{,}\PY{n}{training\PYZus{}error\PYZus{}base2}\PY{p}{)}\PY{p}{)}
+         \PY{n}{test\PYZus{}error\PYZus{}base\PYZus{}dic} \PY{o}{=} \PY{n+nb}{dict}\PY{p}{(}\PY{n+nb}{zip}\PY{p}{(}\PY{n}{lambda\PYZus{}list}\PY{p}{,}\PY{n}{test\PYZus{}error\PYZus{}base2}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+|lambda|training error|test error|
+| 5e-05|      0.000382|   1.23873|
+|0.0005|      0.001173|   0.74296|
+| 0.005|      0.003363|   0.44788|
+|  0.05|      0.006278|   0.26746|
+|   0.5|      0.016274|   0.23548|
+|     5|      0.068466|   0.34115|
+|    50|      0.292422|   0.57418|
+|   500|      0.741764|   0.86520|
+
+    \end{Verbatim}
+
+     We can consider the \(\lambda\) of (a) is 0 as a special situation of
+generalization. The result elucidates that as the \(\lambda\)
+increasing, training error would also increasing. The test error would
+decrease in early period and then increase again. The best \(\lambda\)
+of minimum test error is 0.5. 
+
+    \subsubsection{\texorpdfstring{(c) (5 points) Run stochastic gradient
+descent (SGD) on the original objective function \(f(a)\), with the
+initial guess of \(a\) set to be the all 0's vector. Run SGD for
+1,000,000 iterations for each different choice of the step size,
+\({0.00005, 0.0005, 0.005}\).}{(c) (5 points) Run stochastic gradient descent (SGD) on the original objective function f(a), with the initial guess of a set to be the all 0's vector. Run SGD for 1,000,000 iterations for each different choice of the step size, \{0.00005, 0.0005, 0.005\}.}}\label{c-5-points-run-stochastic-gradient-descent-sgd-on-the-original-objective-function-fa-with-the-initial-guess-of-a-set-to-be-the-all-0s-vector.-run-sgd-for-1000000-iterations-for-each-different-choice-of-the-step-size-0.00005-0.0005-0.005.}
+
+\subsubsection{Report the normalized training error and the normalized
+test error for each of these three settings, averaged over 10
+repetitions/trials.}\label{report-the-normalized-training-error-and-the-normalized-test-error-for-each-of-these-three-settings-averaged-over-10-repetitionstrials.}
+
+\subsubsection{\texorpdfstring{How does the SGD solution compare with
+the solutions obtained using \(l_2\)
+regularization?}{How does the SGD solution compare with the solutions obtained using l\_2 regularization?}}\label{how-does-the-sgd-solution-compare-with-the-solutions-obtained-using-l_2-regularization}
+
+\subsubsection{Note that SGD is minimizing the original objective
+function, which does not have any
+regularization.}\label{note-that-sgd-is-minimizing-the-original-objective-function-which-does-not-have-any-regularization.}
+
+\subsubsection{In Part (a) of this problem, we found the optimal
+solution to the original objective function with respect to the training
+data. How does the training and test error of the SGD solutions compare
+with those of the solution in
+(a)?}\label{in-part-a-of-this-problem-we-found-the-optimal-solution-to-the-original-objective-function-with-respect-to-the-training-data.-how-does-the-training-and-test-error-of-the-sgd-solutions-compare-with-those-of-the-solution-in-a}
+
+\subsubsection{\texorpdfstring{Can you explain your observations? (It
+may be helpful to also compute the normalized training and test error
+corresponding to the true coefficient vector \(f(a^∗)\), for
+comparison.)}{Can you explain your observations? (It may be helpful to also compute the normalized training and test error corresponding to the true coefficient vector f(a\^{}∗), for comparison.)}}\label{can-you-explain-your-observations-it-may-be-helpful-to-also-compute-the-normalized-training-and-test-error-corresponding-to-the-true-coefficient-vector-fa-for-comparison.}
+
+    \protect\hypertarget{jump}{}{}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{n}{train\PYZus{}iter} \PY{o}{=} \PY{l+m+mi}{1000000}
+         \PY{n}{trial\PYZus{}times} \PY{o}{=} \PY{l+m+mi}{10}
+         \PY{k}{if} \PY{n}{test\PYZus{}mode} \PY{o}{==} \PY{k+kc}{True}\PY{p}{:}
+             \PY{n}{train\PYZus{}iter} \PY{o}{=} \PY{l+m+mi}{10000}
+         \PY{n}{step\PYZus{}size\PYZus{}list} \PY{o}{=}  \PY{p}{[}\PY{l+m+mf}{0.00005}\PY{p}{,}\PY{l+m+mf}{0.0005}\PY{p}{,} \PY{l+m+mf}{0.005}\PY{p}{]}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{3}\PY{o}{*}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{step\PYZus{}size\PYZus{}list}\PY{p}{)}\PY{o}{+}\PY{l+m+mf}{3.5}\PY{p}{)}\PY{p}{,}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{step\PYZus{}size\PYZus{}list}\PY{p}{)}\PY{o}{+}\PY{l+m+mf}{3.5}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{|step size|training error|test error|}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{total\PYZus{}running\PYZus{}time} \PY{o}{=} \PY{l+m+mi}{0}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{step\PYZus{}size\PYZus{}list}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{}for 10 times}
+             \PY{n}{running\PYZus{}time} \PY{o}{=} \PY{l+m+mi}{0}
+             \PY{n}{total\PYZus{}training\PYZus{}errors} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{train\PYZus{}iter}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}
+             \PY{n}{total\PYZus{}test\PYZus{}errors} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{train\PYZus{}iter}\PY{o}{/}\PY{o}{/}\PY{l+m+mi}{100}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}
+             
+             \PY{k}{for} \PY{n}{\PYZus{}} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{trial\PYZus{}times}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{running\PYZus{}start} \PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{clock}\PY{p}{(}\PY{p}{)}
+                 \PY{n}{training\PYZus{}errors}\PY{p}{,} \PY{n}{test\PYZus{}errors} \PY{o}{=} \PY{n}{SGDTrain}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{step\PYZus{}size\PYZus{}list}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{train\PYZus{}iter}\PY{p}{,}\PYZbs{}
+                                                      \PY{n}{NormMSELoss}\PY{p}{,} \PY{n}{evaluate} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+                 \PY{n}{running\PYZus{}time} \PY{o}{+}\PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{clock}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{running\PYZus{}start}
+                 \PY{n}{total\PYZus{}training\PYZus{}errors} \PY{o}{+}\PY{o}{=} \PY{n}{training\PYZus{}errors}
+                 \PY{n}{total\PYZus{}test\PYZus{}errors} \PY{o}{+}\PY{o}{=} \PY{n}{test\PYZus{}errors}
+         
+             \PY{n}{total\PYZus{}running\PYZus{}time} \PY{o}{+}\PY{o}{=} \PY{n}{running\PYZus{}time} \PY{o}{/} \PY{n}{trial\PYZus{}times}
+             
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{|}\PY{l+s+si}{\PYZpc{}9.4g}\PY{l+s+s1}{|      }\PY{l+s+si}{\PYZpc{}6lf}\PY{l+s+s1}{|  }\PY{l+s+si}{\PYZpc{}6lf}\PY{l+s+s1}{|}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}}\PY{p}{(}\PY{n}{step\PYZus{}size\PYZus{}list}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PYZbs{}
+                                                 \PY{n}{total\PYZus{}training\PYZus{}errors}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{/}\PY{n}{trial\PYZus{}times}\PY{p}{,} \PYZbs{}
+                                                 \PY{n}{total\PYZus{}test\PYZus{}errors}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{/}\PY{n}{trial\PYZus{}times}\PY{p}{)}\PY{p}{)}
+             
+             \PY{n}{x\PYZus{}index1} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{train\PYZus{}iter}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+             \PY{n}{x\PYZus{}index2} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{train\PYZus{}iter}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{)}
+             
+             \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{n+nb}{len}\PY{p}{(}\PY{n}{step\PYZus{}size\PYZus{}list}\PY{p}{)}\PY{p}{,}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{step size = }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{step\PYZus{}size\PYZus{}list}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{iteraion}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{normalized error}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x\PYZus{}index1}\PY{p}{,} \PY{n}{total\PYZus{}training\PYZus{}errors}\PY{o}{/}\PY{n}{trial\PYZus{}times}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x\PYZus{}index2}\PY{p}{,} \PY{n}{total\PYZus{}test\PYZus{}errors}\PY{o}{/}\PY{n}{trial\PYZus{}times}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{}draw base line}
+             \PY{k}{global} \PY{n}{training\PYZus{}error\PYZus{}base}\PY{p}{,} \PY{n}{test\PYZus{}error\PYZus{}base}
+         
+             \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x\PYZus{}index1}\PY{p}{,} \PY{n}{training\PYZus{}error\PYZus{}base1} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{x\PYZus{}index1}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+             
+             \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{training error}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{test error}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{training error baseline}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PYZbs{}
+                       \PY{n}{bbox\PYZus{}to\PYZus{}anchor} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.2}\PY{p}{)}\PY{p}{,} \PY{n}{loc} \PY{o}{=} \PY{l+m+mi}{3}\PY{p}{,} \PY{n}{ncol} \PY{o}{=} \PY{l+m+mi}{2}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{average running time =}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{total\PYZus{}running\PYZus{}time} \PY{o}{/} \PY{n+nb}{len}\PY{p}{(}\PY{n}{step\PYZus{}size\PYZus{}list}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{s}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+|step size|training error|test error|
+|    5e-05|      0.324751|  0.605891|
+|   0.0005|      0.051776|  0.344899|
+|    0.005|      0.021413|  0.239699|
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_34_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+average running time = 1.3061733894313947 s
+
+    \end{Verbatim}
+
+     We test 10 times and find the best test error is aroound 0.2 on
+average. We need huge amount of iterations to update the parameters of
+\(a\), and rebound around 0.2.
+
+Compare with part(a), we get higher but still near to zero train error
+and much lower test error i.e. 0.2 vs 2.8925. However, there is still a
+wide gap between training error and test error, meaning that overfitting
+problem occurs again.
+
+Using SGD algorithm, we would not exploit all training data at once, but
+use them one by one. When the iterations get larger, we training on the
+identical data without any other constraints which could not alleviate
+the overfitting problem.
+
+    \subsubsection{(d) (7 points) We will now examine the behavior of SGD in
+more detail. For step sizes \{0.00005, 0.005\} and 1,000,000 iterations
+of
+SGD,}\label{d-7-points-we-will-now-examine-the-behavior-of-sgd-in-more-detail.-for-step-sizes-0.00005-0.005-and-1000000-iterations-of-sgd}
+
+    \subsubsection{\texorpdfstring{(i) Plot the normalized training error
+vs. the iteration number. On the plot of training error, draw a line
+parallel to the x-axis indicating the error \(\hat{f}(a^*)\) of the true
+model
+\(a^*\)}{(i) Plot the normalized training error vs. the iteration number. On the plot of training error, draw a line parallel to the x-axis indicating the error \textbackslash{}hat\{f\}(a\^{}*) of the true model a\^{}*}}\label{i-plot-the-normalized-training-error-vs.-the-iteration-number.-on-the-plot-of-training-error-draw-a-line-parallel-to-the-x-axis-indicating-the-error-hatfa-of-the-true-model-a}
+
+\subsubsection{(ii) Plot the normalized test error vs. the iteration
+number. Your code might take a long time to run if you compute the test
+error after every SGD step---feel free to compute the test error every
+100 iterations of SGD to make the
+plots.}\label{ii-plot-the-normalized-test-error-vs.-the-iteration-number.-your-code-might-take-a-long-time-to-run-if-you-compute-the-test-error-after-every-sgd-stepfeel-free-to-compute-the-test-error-every-100-iterations-of-sgd-to-make-the-plots.}
+
+     These two plots are in the Section \ref{jump}.
+
+    \subsubsection{\texorpdfstring{(iii) Plot the \(l_2\) norm of the SGD
+solution vs. the iteration
+number.}{(iii) Plot the l\_2 norm of the SGD solution vs. the iteration number.}}\label{iii-plot-the-l_2-norm-of-the-sgd-solution-vs.-the-iteration-number.}
+
+\subsubsection{\texorpdfstring{Comment on the plots. What can you say
+about the generalization ability of SGD with different step sizes? Does
+the plot correspond to the intuition that a learning algorithm starts to
+overfit when the training error becomes too small, i.e. smaller than the
+noise level of the true model? How does the generalization ability of
+the final solution depend on the \(l_2\) norm of the final
+solution?}{Comment on the plots. What can you say about the generalization ability of SGD with different step sizes? Does the plot correspond to the intuition that a learning algorithm starts to overfit when the training error becomes too small, i.e. smaller than the noise level of the true model? How does the generalization ability of the final solution depend on the l\_2 norm of the final solution?}}\label{comment-on-the-plots.-what-can-you-say-about-the-generalization-ability-of-sgd-with-different-step-sizes-does-the-plot-correspond-to-the-intuition-that-a-learning-algorithm-starts-to-overfit-when-the-training-error-becomes-too-small-i.e.-smaller-than-the-noise-level-of-the-true-model-how-does-the-generalization-ability-of-the-final-solution-depend-on-the-l_2-norm-of-the-final-solution}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{n}{train\PYZus{}iter} \PY{o}{=} \PY{l+m+mi}{1000000}
+         \PY{n}{trial\PYZus{}times} \PY{o}{=} \PY{l+m+mi}{10}
+         \PY{k}{if} \PY{n}{test\PYZus{}mode} \PY{o}{==} \PY{k+kc}{True}\PY{p}{:}
+             \PY{n}{train\PYZus{}iter} \PY{o}{=} \PY{l+m+mi}{10000}
+         \PY{n}{step\PYZus{}size\PYZus{}list} \PY{o}{=}  \PY{p}{[}\PY{l+m+mf}{0.00005}\PY{p}{,}\PY{l+m+mf}{0.0005}\PY{p}{,} \PY{l+m+mf}{0.005}\PY{p}{]}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{3}\PY{o}{*}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{step\PYZus{}size\PYZus{}list}\PY{p}{)}\PY{o}{+}\PY{l+m+mf}{3.5}\PY{p}{)}\PY{p}{,}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{step\PYZus{}size\PYZus{}list}\PY{p}{)}\PY{o}{+}\PY{l+m+mf}{3.5}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{total\PYZus{}running\PYZus{}time} \PY{o}{=} \PY{l+m+mi}{0}
+         
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{step\PYZus{}size\PYZus{}list}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{}for 10 times}
+             \PY{n}{running\PYZus{}time} \PY{o}{=} \PY{l+m+mi}{0}
+             \PY{n}{total\PYZus{}training\PYZus{}errors} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{train\PYZus{}iter}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}
+             \PY{n}{total\PYZus{}test\PYZus{}errors} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{train\PYZus{}iter}\PY{o}{/}\PY{o}{/}\PY{l+m+mi}{100}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}
+             
+             \PY{k}{for} \PY{n}{\PYZus{}} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{trial\PYZus{}times}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{running\PYZus{}start} \PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{clock}\PY{p}{(}\PY{p}{)}
+                 \PY{n}{training\PYZus{}errors}\PY{p}{,} \PY{n}{test\PYZus{}errors} \PY{o}{=} \PY{n}{SGDTrain}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{step\PYZus{}size\PYZus{}list}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{train\PYZus{}iter}\PY{p}{,}\PYZbs{}
+                                                      \PY{n}{NormMSELoss}\PY{p}{,} \PY{n}{evaluate} \PY{o}{=} \PY{k+kc}{True}\PY{p}{,} \PY{n}{lambda\PYZus{}value} \PY{o}{=} \PY{l+m+mf}{0.5}\PY{p}{)}
+                 \PY{n}{running\PYZus{}time} \PY{o}{+}\PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{clock}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{running\PYZus{}start}
+                 \PY{n}{total\PYZus{}training\PYZus{}errors} \PY{o}{+}\PY{o}{=} \PY{n}{training\PYZus{}errors}
+                 \PY{n}{total\PYZus{}test\PYZus{}errors} \PY{o}{+}\PY{o}{=} \PY{n}{test\PYZus{}errors}
+             
+             \PY{n}{total\PYZus{}running\PYZus{}time} \PY{o}{+}\PY{o}{=} \PY{n}{running\PYZus{}time} \PY{o}{/} \PY{n}{trial\PYZus{}times}
+         
+             \PY{n}{x\PYZus{}index1} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{train\PYZus{}iter}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+             \PY{n}{x\PYZus{}index2} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{train\PYZus{}iter}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{)}
+             
+             \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{n+nb}{len}\PY{p}{(}\PY{n}{step\PYZus{}size\PYZus{}list}\PY{p}{)}\PY{p}{,}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{step size = }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{step\PYZus{}size\PYZus{}list}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{iteraion}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{normalized error}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x\PYZus{}index1}\PY{p}{,} \PY{n}{total\PYZus{}training\PYZus{}errors}\PY{o}{/}\PY{n}{trial\PYZus{}times}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x\PYZus{}index2}\PY{p}{,} \PY{n}{total\PYZus{}test\PYZus{}errors}\PY{o}{/}\PY{n}{trial\PYZus{}times}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{}draw base line}
+             \PY{k}{global} \PY{n}{training\PYZus{}error\PYZus{}base}\PY{p}{,} \PY{n}{test\PYZus{}error\PYZus{}base}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x\PYZus{}index1}\PY{p}{,} \PY{n}{training\PYZus{}error\PYZus{}base\PYZus{}dic}\PY{p}{[}\PY{l+m+mf}{0.5}\PY{p}{]} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{x\PYZus{}index1}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x\PYZus{}index2}\PY{p}{,} \PY{n}{test\PYZus{}error\PYZus{}base\PYZus{}dic}\PY{p}{[}\PY{l+m+mf}{0.5}\PY{p}{]} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{x\PYZus{}index2}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+             
+             \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{training error}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{test error}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{training error baseline}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{test error baseline}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PYZbs{}
+                       \PY{n}{bbox\PYZus{}to\PYZus{}anchor} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.2}\PY{p}{)}\PY{p}{,} \PY{n}{loc} \PY{o}{=} \PY{l+m+mi}{3}\PY{p}{,} \PY{n}{ncol} \PY{o}{=} \PY{l+m+mi}{2}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{average running time =}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{total\PYZus{}running\PYZus{}time} \PY{o}{/} \PY{n+nb}{len}\PY{p}{(}\PY{n}{step\PYZus{}size\PYZus{}list}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{s}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_40_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+average running time = 1.316766286094709 s
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{train\PYZus{}iter} \PY{o}{=} \PY{l+m+mi}{1000000}
+         \PY{n}{trial\PYZus{}times} \PY{o}{=} \PY{l+m+mi}{10}
+         \PY{k}{if} \PY{n}{test\PYZus{}mode} \PY{o}{==} \PY{k+kc}{True}\PY{p}{:}
+             \PY{n}{train\PYZus{}iter} \PY{o}{=} \PY{l+m+mi}{10000}
+         \PY{n}{step\PYZus{}size\PYZus{}list} \PY{o}{=}  \PY{p}{[}\PY{l+m+mf}{0.00005}\PY{p}{,}\PY{l+m+mf}{0.0005}\PY{p}{,} \PY{l+m+mf}{0.005}\PY{p}{]}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{3}\PY{o}{*}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{step\PYZus{}size\PYZus{}list}\PY{p}{)}\PY{o}{+}\PY{l+m+mf}{3.5}\PY{p}{)}\PY{p}{,}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{step\PYZus{}size\PYZus{}list}\PY{p}{)}\PY{o}{+}\PY{l+m+mf}{3.5}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{total\PYZus{}running\PYZus{}time} \PY{o}{=} \PY{l+m+mi}{0}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{step\PYZus{}size\PYZus{}list}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{}for 10 times}
+             \PY{n}{running\PYZus{}time} \PY{o}{=} \PY{l+m+mi}{0}
+             \PY{n}{total\PYZus{}training\PYZus{}errors} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{train\PYZus{}iter}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}
+             \PY{n}{total\PYZus{}test\PYZus{}errors} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{train\PYZus{}iter}\PY{o}{/}\PY{o}{/}\PY{l+m+mi}{100}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}
+             
+             \PY{k}{for} \PY{n}{\PYZus{}} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{trial\PYZus{}times}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{running\PYZus{}start} \PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{clock}\PY{p}{(}\PY{p}{)}
+                 \PY{n}{training\PYZus{}errors}\PY{p}{,} \PY{n}{test\PYZus{}errors} \PY{o}{=} \PY{n}{SGDTrain}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{step\PYZus{}size\PYZus{}list}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{train\PYZus{}iter}\PY{p}{,}\PYZbs{}
+                                                      \PY{n}{NormMSELoss}\PY{p}{,} \PY{n}{evaluate} \PY{o}{=} \PY{k+kc}{True}\PY{p}{,} \PY{n}{lambda\PYZus{}value} \PY{o}{=} \PY{l+m+mf}{0.05}\PY{p}{)}
+                 \PY{n}{running\PYZus{}time} \PY{o}{+}\PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{clock}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{running\PYZus{}start}
+                 \PY{n}{total\PYZus{}training\PYZus{}errors} \PY{o}{+}\PY{o}{=} \PY{n}{training\PYZus{}errors}
+                 \PY{n}{total\PYZus{}test\PYZus{}errors} \PY{o}{+}\PY{o}{=} \PY{n}{test\PYZus{}errors}
+             
+             \PY{n}{total\PYZus{}running\PYZus{}time} \PY{o}{+}\PY{o}{=} \PY{n}{running\PYZus{}time} \PY{o}{/} \PY{n}{trial\PYZus{}times}
+         
+             \PY{n}{x\PYZus{}index1} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{train\PYZus{}iter}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+             \PY{n}{x\PYZus{}index2} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{train\PYZus{}iter}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{)}
+             
+             \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{n+nb}{len}\PY{p}{(}\PY{n}{step\PYZus{}size\PYZus{}list}\PY{p}{)}\PY{p}{,}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{step size = }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{step\PYZus{}size\PYZus{}list}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{iteraion}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{normalized error}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{ylim}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x\PYZus{}index1}\PY{p}{,} \PY{n}{total\PYZus{}training\PYZus{}errors}\PY{o}{/}\PY{n}{trial\PYZus{}times}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x\PYZus{}index2}\PY{p}{,} \PY{n}{total\PYZus{}test\PYZus{}errors}\PY{o}{/}\PY{n}{trial\PYZus{}times}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{}draw base line}
+             \PY{k}{global} \PY{n}{training\PYZus{}error\PYZus{}base}\PY{p}{,} \PY{n}{test\PYZus{}error\PYZus{}base}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x\PYZus{}index1}\PY{p}{,} \PY{n}{training\PYZus{}error\PYZus{}base\PYZus{}dic}\PY{p}{[}\PY{l+m+mf}{0.05}\PY{p}{]} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{x\PYZus{}index1}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x\PYZus{}index2}\PY{p}{,} \PY{n}{test\PYZus{}error\PYZus{}base\PYZus{}dic}\PY{p}{[}\PY{l+m+mf}{0.05}\PY{p}{]} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{x\PYZus{}index2}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+             
+             \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{training error}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{test error}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{training error baseline}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{test error baseline}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PYZbs{}
+                       \PY{n}{bbox\PYZus{}to\PYZus{}anchor} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.2}\PY{p}{)}\PY{p}{,} \PY{n}{loc} \PY{o}{=} \PY{l+m+mi}{3}\PY{p}{,} \PY{n}{ncol} \PY{o}{=} \PY{l+m+mi}{2}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{average running time =}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{total\PYZus{}running\PYZus{}time} \PY{o}{/} \PY{n+nb}{len}\PY{p}{(}\PY{n}{step\PYZus{}size\PYZus{}list}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{s}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_41_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+average running time = 1.2469737496513769 s
+
+    \end{Verbatim}
+
+     As to different step size, when the step size increasing, the
+oscillation amplitude of the object function becomes larger, but
+convergence faster. The model show more and more preference to sum of
+square error when step size becomes larger.
+
+The plot corresond to the intuition that a learning algorithm starts to
+overfit when the training error becomes too small. Intuitively, the
+training error should not be less than the noise level of true model. If
+the training error is less than the noise level, it reveals that the
+model is not in accord with the true distribution of the data sample
+with noise. In other perspective, it is overfitting with the training
+sample.
+
+In this situation, generalized item \(l_2\) act as a role to control the
+total error. The larger the value of \(\lambda\), the severer conflict
+between sum of square item error and generalized item error. The
+conflict scale could be visualized as oscillation amplitute of the
+object function.We test \(\lambda=0.5\) and \(\lambda=0.05\) . We found
+\(\lambda=0.05\) get lower error on both training and testing set, which
+shows it has the better generalization ability
+
+    \subsubsection{\texorpdfstring{(e) (4 points) We will now examine the
+effect of the starting point on the SGD solution. Fixing the step size
+at 0.00005 and the maximum number of iterations at 1,000,000, choose the
+initial point randomly from the d-dimensional sphere with radius
+\(r = {0, 0.1, 0.5, 1, 10, 20, 30}\), and plot the average normalized
+training error and the average normalized test error over 10 iterations
+vs \(r\). Comment on the results, in relation to the results from part
+(b) where you explored different \(l_2\) regularization coefficients.
+Can you provide an explanation for the behavior seen in this
+plot?}{(e) (4 points) We will now examine the effect of the starting point on the SGD solution. Fixing the step size at 0.00005 and the maximum number of iterations at 1,000,000, choose the initial point randomly from the d-dimensional sphere with radius r = \{0, 0.1, 0.5, 1, 10, 20, 30\}, and plot the average normalized training error and the average normalized test error over 10 iterations vs r. Comment on the results, in relation to the results from part (b) where you explored different l\_2 regularization coefficients. Can you provide an explanation for the behavior seen in this plot?}}\label{e-4-points-we-will-now-examine-the-effect-of-the-starting-point-on-the-sgd-solution.-fixing-the-step-size-at-0.00005-and-the-maximum-number-of-iterations-at-1000000-choose-the-initial-point-randomly-from-the-d-dimensional-sphere-with-radius-r-0-0.1-0.5-1-10-20-30-and-plot-the-average-normalized-training-error-and-the-average-normalized-test-error-over-10-iterations-vs-r.-comment-on-the-results-in-relation-to-the-results-from-part-b-where-you-explored-different-l_2-regularization-coefficients.-can-you-provide-an-explanation-for-the-behavior-seen-in-this-plot}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{n}{train\PYZus{}iter} \PY{o}{=} \PY{l+m+mi}{1000000}
+         \PY{n}{trial\PYZus{}times} \PY{o}{=} \PY{l+m+mi}{10}
+         \PY{n}{test\PYZus{}mode} \PY{o}{=} \PY{k+kc}{False}
+         \PY{k}{if} \PY{n}{test\PYZus{}mode} \PY{o}{==} \PY{k+kc}{True}\PY{p}{:}
+             \PY{n}{train\PYZus{}iter} \PY{o}{=} \PY{l+m+mi}{10000}
+         \PY{n}{radius\PYZus{}list} \PY{o}{=}  \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mf}{0.1}\PY{p}{,}\PY{l+m+mf}{0.5}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{30}\PY{p}{]}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{3}\PY{o}{*}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{step\PYZus{}size\PYZus{}list}\PY{p}{)}\PY{o}{+}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{3}\PY{o}{*}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{step\PYZus{}size\PYZus{}list}\PY{p}{)}\PY{o}{+}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{n}{total\PYZus{}running\PYZus{}time} \PY{o}{=} \PY{l+m+mi}{0}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{begin}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{radius\PYZus{}list}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{}for 10 times}
+             \PY{n}{running\PYZus{}time} \PY{o}{=} \PY{l+m+mi}{0}
+             \PY{n}{total\PYZus{}training\PYZus{}errors} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{train\PYZus{}iter}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}
+             \PY{n}{total\PYZus{}test\PYZus{}errors} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{train\PYZus{}iter}\PY{o}{/}\PY{o}{/}\PY{l+m+mi}{100}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}
+             
+             \PY{k}{for} \PY{n}{\PYZus{}} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{trial\PYZus{}times}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{running\PYZus{}start} \PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{clock}\PY{p}{(}\PY{p}{)}
+                 \PY{n}{training\PYZus{}errors}\PY{p}{,} \PY{n}{test\PYZus{}errors} \PY{o}{=} \PY{n}{SGDTrain}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{l+m+mf}{0.00005}\PY{p}{,} \PY{n}{train\PYZus{}iter}\PY{p}{,}\PYZbs{}
+                                                      \PY{n}{NormMSELoss}\PY{p}{,} \PY{n}{evaluate} \PY{o}{=} \PY{k+kc}{True}\PY{p}{,} \PY{n}{lambda\PYZus{}value} \PY{o}{=} \PY{l+m+mf}{0.05}\PY{p}{,}\PYZbs{}
+                                                        \PY{n}{random\PYZus{}radius} \PY{o}{=} \PY{n}{radius\PYZus{}list}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{running\PYZus{}time} \PY{o}{+}\PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{clock}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{running\PYZus{}start}
+                 \PY{n}{total\PYZus{}training\PYZus{}errors} \PY{o}{+}\PY{o}{=} \PY{n}{training\PYZus{}errors}
+                 \PY{n}{total\PYZus{}test\PYZus{}errors} \PY{o}{+}\PY{o}{=} \PY{n}{test\PYZus{}errors}
+             
+             \PY{n}{total\PYZus{}running\PYZus{}time} \PY{o}{+}\PY{o}{=} \PY{n}{running\PYZus{}time} \PY{o}{/} \PY{n}{trial\PYZus{}times}
+         
+             \PY{n}{x\PYZus{}index1} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{train\PYZus{}iter}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+             \PY{n}{x\PYZus{}index2} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{train\PYZus{}iter}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{)}
+             
+             \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,}\PY{n+nb}{len}\PY{p}{(}\PY{n}{radius\PYZus{}list}\PY{p}{)} \PY{o}{/}\PY{o}{/} \PY{l+m+mi}{3} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{,}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{random radius = }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{radius\PYZus{}list}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{iteraion}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{normalized error}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{ylim}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}
+         
+             \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x\PYZus{}index1}\PY{p}{,} \PY{n}{total\PYZus{}training\PYZus{}errors}\PY{o}{/}\PY{n}{trial\PYZus{}times}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x\PYZus{}index2}\PY{p}{,} \PY{n}{total\PYZus{}test\PYZus{}errors}\PY{o}{/}\PY{n}{trial\PYZus{}times}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{}draw base line}
+             \PY{k}{global} \PY{n}{training\PYZus{}error\PYZus{}base}\PY{p}{,} \PY{n}{test\PYZus{}error\PYZus{}base}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x\PYZus{}index1}\PY{p}{,} \PY{n}{training\PYZus{}error\PYZus{}base\PYZus{}dic}\PY{p}{[}\PY{l+m+mf}{0.05}\PY{p}{]} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{x\PYZus{}index1}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x\PYZus{}index2}\PY{p}{,} \PY{n}{test\PYZus{}error\PYZus{}base\PYZus{}dic}\PY{p}{[}\PY{l+m+mf}{0.05}\PY{p}{]} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{x\PYZus{}index2}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+             
+             \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{training error}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{test error}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{training error baseline}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{test error baseline}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PYZbs{}
+                       \PY{n}{bbox\PYZus{}to\PYZus{}anchor} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.175}\PY{p}{)}\PY{p}{,} \PY{n}{loc} \PY{o}{=} \PY{l+m+mi}{3}\PY{p}{,} \PY{n}{ncol} \PY{o}{=} \PY{l+m+mi}{2}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{average running time =}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{total\PYZus{}running\PYZus{}time} \PY{o}{/} \PY{n+nb}{len}\PY{p}{(}\PY{n}{radius\PYZus{}list}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{s}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+begin
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_44_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+average running time = 109.0242187331905 s
+
+    \end{Verbatim}
+
+    We can see that the final solution of different initial point is
+similar, but the convergence speed is different. Because \(a\) obeys
+Gauss distribution with a mean value of 0, \(a\) is near 0 vector. When
+we initial the point close to 0, it would converge faster than we use
+initial point with a larger radius sphere.
+
+    \section{Part3}\label{part3}
+
+\subsubsection{\texorpdfstring{We will now examine the setting where
+\(d > n\). Choose \(d = 200\) and \(n = 100\). Use the following Python
+code for generating the training data and test
+data.}{We will now examine the setting where d \textgreater{} n. Choose d = 200 and n = 100. Use the following Python code for generating the training data and test data.}}\label{we-will-now-examine-the-setting-where-d-n.-choose-d-200-and-n-100.-use-the-following-python-code-for-generating-the-training-data-and-test-data.}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{c+c1}{\PYZsh{}generate data}
+         \PY{n}{train\PYZus{}n} \PY{o}{=} \PY{l+m+mi}{100}
+         \PY{n}{test\PYZus{}n} \PY{o}{=} \PY{l+m+mi}{10000}
+         \PY{n}{d} \PY{o}{=} \PY{l+m+mi}{200}
+         \PY{n}{X\PYZus{}train} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{normal}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{p}{(}\PY{n}{train\PYZus{}n}\PY{p}{,}\PY{n}{d}\PY{p}{)}\PY{p}{)}
+         \PY{n}{a\PYZus{}true} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{normal}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{p}{(}\PY{n}{d}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+         \PY{n}{y\PYZus{}train} \PY{o}{=} \PY{n}{X\PYZus{}train}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{a\PYZus{}true}\PY{p}{)} \PY{o}{+} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{normal}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mf}{0.5}\PY{p}{,}\PY{n}{size}\PY{o}{=}\PY{p}{(}\PY{n}{train\PYZus{}n}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+         \PY{n}{X\PYZus{}test} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{normal}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{p}{(}\PY{n}{test\PYZus{}n}\PY{p}{,}\PY{n}{d}\PY{p}{)}\PY{p}{)}
+         \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{X\PYZus{}test}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{a\PYZus{}true}\PY{p}{)} \PY{o}{+} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{normal}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mf}{0.5}\PY{p}{,}\PY{n}{size}\PY{o}{=}\PY{p}{(}\PY{n}{test\PYZus{}n}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+         \PY{k}{def} \PY{n+nf}{GetSMatrix}\PY{p}{(}\PY{n}{X}\PY{p}{)}\PY{p}{:}
+             \PY{n}{S} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{n+nb}{len}\PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+             \PY{n}{mean} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{axis} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+             \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{X}\PY{p}{:}
+                 \PY{n}{xx} \PY{o}{=} \PY{n}{x}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+                 \PY{n}{S} \PY{o}{+}\PY{o}{=} \PY{p}{(}\PY{n}{xx} \PY{o}{\PYZhy{}} \PY{n}{mean}\PY{p}{)} \PY{o}{@} \PY{p}{(}\PY{n}{xx} \PY{o}{\PYZhy{}} \PY{n}{mean}\PY{p}{)}\PY{o}{.}\PY{n}{T}
+             \PY{k}{return} \PY{n}{S}
+         
+         \PY{k}{def} \PY{n+nf}{GetMainVector}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{dimension}\PY{p}{)}\PY{p}{:}
+             \PY{n}{S} \PY{o}{=} \PY{n}{GetSMatrix}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+             \PY{n}{eigvalue}\PY{p}{,} \PY{n}{eigvector} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{eigh}\PY{p}{(}\PY{n}{S}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{}kmax\PYZus{}eigvalue = eigvalue.argsort()[\PYZhy{}dimension:]}
+             \PY{n}{kmax\PYZus{}eigvalue\PYZus{}index} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{argpartition}\PY{p}{(}\PY{n}{eigvalue}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{n}{dimension}\PY{p}{)}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{n}{dimension}\PY{p}{:}\PY{p}{]}
+             \PY{n}{W} \PY{o}{=} \PY{n}{eigvector}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{kmax\PYZus{}eigvalue\PYZus{}index}\PY{p}{]}
+             \PY{k}{return} \PY{n}{W}
+\end{Verbatim}
+
+
+    \subsubsection{(a) (11 points: 4 for performance, 7 for analysis and
+discussion) The goal of this problem is to achieve the best test error
+that you can, using the techniques from the previous two parts and/or by
+other means. (Of course, your learning algorithm can only use the
+training data for this purpose, and cannot refer to a\_true.) You will
+receive credit based on your accuracy. Report the average test error you
+obtain, averaged over 1000 trials (where you re-pick a\_true and the
+data in each trial). Feel free to use regularization, SGD, gradient
+descent, or any other algorithm you want to try, but clearly describe
+the algorithm you use in human-readable pseudo-code. Briefly discuss the
+approach you used, your thought process that informed your decisions,
+and the extent to which you believe a better test error is achievable.
+Your score will be based on a combination of the short discussion and
+the average test error you obtain. A paragraph of analysis is enough to
+earn full credit---don't go overboard unless you really want
+to.}\label{a-11-points-4-for-performance-7-for-analysis-and-discussion-the-goal-of-this-problem-is-to-achieve-the-best-test-error-that-you-can-using-the-techniques-from-the-previous-two-parts-andor-by-other-means.-of-course-your-learning-algorithm-can-only-use-the-training-data-for-this-purpose-and-cannot-refer-to-a_true.-you-will-receive-credit-based-on-your-accuracy.-report-the-average-test-error-you-obtain-averaged-over-1000-trials-where-you-re-pick-a_true-and-the-data-in-each-trial.-feel-free-to-use-regularization-sgd-gradient-descent-or-any-other-algorithm-you-want-to-try-but-clearly-describe-the-algorithm-you-use-in-human-readable-pseudo-code.-briefly-discuss-the-approach-you-used-your-thought-process-that-informed-your-decisions-and-the-extent-to-which-you-believe-a-better-test-error-is-achievable.-your-score-will-be-based-on-a-combination-of-the-short-discussion-and-the-average-test-error-you-obtain.-a-paragraph-of-analysis-is-enough-to-earn-full-creditdont-go-overboard-unless-you-really-want-to.}
+
+    From the experiment of part 1 and part 2, we find tat step size of
+0.0005 is the fastest stable step size for SGD training, so we choose
+step size=0.0005. We can see from part 1 that GD have the lower error
+than SGD, and the training data size is small, so we can combine thiese
+two algorithm together to train the data by using larger batch size. We
+use regularization to alleviate overfitting and set the initial point in
+random raidus of 0.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{k}{def} \PY{n+nf}{getGradient}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{a}\PY{p}{,} \PY{n}{index}\PY{p}{,} \PY{n}{lambda\PYZus{}value} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{}gradient below is for index \PYZhy{}\PYZgt{} a\PYZus{}t}
+             \PY{c+c1}{\PYZsh{}gradient = 2 * (X@a  \PYZhy{} y).T @ (X[:,index])}
+             \PY{c+c1}{\PYZsh{}now change into index \PYZhy{}\PYZgt{} x\PYZus{}i}
+             \PY{n}{gradient} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{2} \PY{o}{*} \PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{n}{index}\PY{p}{]}\PY{n+nd}{@a}\PY{o}{\PYZhy{}}\PY{n}{y}\PY{p}{[}\PY{n}{index}\PY{p}{]}\PY{p}{)} \PY{o}{*} \PY{n}{X}\PY{p}{[}\PY{n}{index}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)} \PY{o}{+} \PY{p}{(}\PY{l+m+mi}{2} \PY{o}{*} \PY{n}{lambda\PYZus{}value} \PY{o}{*} \PY{n}{a}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+             \PY{k}{return} \PY{n}{gradient}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}using another metric, y2 is the real ture output}
+         \PY{k}{def} \PY{n+nf}{NormMSELoss}\PY{p}{(}\PY{n}{y1}\PY{p}{,} \PY{n}{y2}\PY{p}{)}\PY{p}{:}
+             \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{(}\PY{n}{y1} \PY{o}{\PYZhy{}} \PY{n}{y2}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{y2}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+         \PY{k}{def} \PY{n+nf}{SGDTrain}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{step\PYZus{}size}\PY{p}{,} \PY{n}{iters}\PY{p}{,} \PY{n}{metric}\PY{p}{,} \PY{n}{batch\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{evaluate} \PY{o}{=} \PY{k+kc}{False}\PY{p}{,} \PY{n}{lambda\PYZus{}value} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{,} \PY{n}{random\PYZus{}radius} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{:}
+             \PY{n}{a} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{uniform}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{random\PYZus{}radius}\PY{p}{,} \PY{n}{size} \PY{o}{=} \PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+             \PY{n}{obj\PYZus{}value} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{iters}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}
+             \PY{n}{test\PYZus{}error} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{iters}\PY{o}{/}\PY{o}{/}\PY{l+m+mi}{100} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)}
+             \PY{n}{obj\PYZus{}value}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{n}{metric}\PY{p}{(}\PY{n}{X} \PY{o}{@} \PY{n}{a}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+             \PY{k}{if} \PY{n}{evaluate}\PY{p}{:}
+                 \PY{k}{global} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}test}
+                 \PY{n}{test\PYZus{}error}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{n}{metric}\PY{p}{(}\PY{n}{X\PYZus{}test} \PY{o}{@} \PY{n}{a}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{)}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{iters}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{gd} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+                 \PY{n}{indexs} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{X}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+                 \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{shuffle}\PY{p}{(}\PY{n}{indexs}\PY{p}{)}
+                 \PY{k}{for} \PY{n}{index\PYZus{}i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{batch\PYZus{}size}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{index} \PY{o}{=} \PY{n}{indexs}\PY{p}{[}\PY{n}{index\PYZus{}i}\PY{p}{]}
+                     \PY{n}{gd} \PY{o}{+}\PY{o}{=} \PY{n}{getGradient}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{a}\PY{p}{,} \PY{n}{index}\PY{p}{,} \PY{n}{lambda\PYZus{}value}\PY{p}{)}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{float64}\PY{p}{)}
+                 \PY{c+c1}{\PYZsh{}update a with gradient}
+                 \PY{n}{a} \PY{o}{=} \PY{n}{a} \PY{o}{\PYZhy{}} \PY{n}{step\PYZus{}size} \PY{o}{*} \PY{n}{gd}
+                 \PY{n}{obj\PYZus{}value}\PY{p}{[}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{n}{metric}\PY{p}{(}\PY{n}{X} \PY{o}{@} \PY{n}{a}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+                 \PY{k}{if} \PY{n}{evaluate} \PY{o+ow}{and} \PY{p}{(}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)} \PY{o}{\PYZpc{}} \PY{l+m+mi}{100} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+                     \PY{n}{test\PYZus{}error}\PY{p}{[}\PY{p}{(}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{/}\PY{o}{/}\PY{l+m+mi}{100}\PY{p}{]} \PY{o}{=} \PY{n}{metric}\PY{p}{(}\PY{n}{X\PYZus{}test} \PY{o}{@} \PY{n}{a}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{)}
+             \PY{k}{if} \PY{n}{evaluate}\PY{p}{:}
+                 \PY{k}{return} \PY{n}{obj\PYZus{}value}\PY{p}{,} \PY{n}{test\PYZus{}error}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{k}{return} \PY{n}{obj\PYZus{}value}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{n}{trial\PYZus{}times} \PY{o}{=} \PY{l+m+mi}{100}
+         \PY{n}{training\PYZus{}error\PYZus{}base1} \PY{o}{=} \PY{l+m+mi}{0}
+         \PY{n}{test\PYZus{}error\PYZus{}base1} \PY{o}{=} \PY{l+m+mi}{0}
+         
+         \PY{k}{for} \PY{n}{\PYZus{}} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{trial\PYZus{}times}\PY{p}{)}\PY{p}{:}
+             \PY{n}{training\PYZus{}error\PYZus{}base1} \PY{o}{+}\PY{o}{=} \PY{n}{NormMSELoss}\PY{p}{(}\PY{n}{X\PYZus{}train} \PY{o}{@} \PY{n}{a\PYZus{}true}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+             \PY{n}{test\PYZus{}error\PYZus{}base1} \PY{o}{+}\PY{o}{=} \PY{n}{NormMSELoss}\PY{p}{(}\PY{n}{X\PYZus{}test} \PY{o}{@} \PY{n}{a\PYZus{}true}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{)}
+         
+         \PY{n}{training\PYZus{}error\PYZus{}base1} \PY{o}{/}\PY{o}{=} \PY{n}{trial\PYZus{}times}
+         \PY{n}{test\PYZus{}error\PYZus{}base1} \PY{o}{/}\PY{o}{=} \PY{n}{trial\PYZus{}times}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{training error = }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{training\PYZus{}error\PYZus{}base1}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{test error = }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{test\PYZus{}error\PYZus{}base1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+training error =  0.0377750282520265
+test error =  0.033915765575832736
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{n}{train\PYZus{}iter} \PY{o}{=} \PY{l+m+mi}{20000}
+         \PY{n}{trial\PYZus{}times} \PY{o}{=} \PY{l+m+mi}{10}
+         \PY{n}{total\PYZus{}running\PYZus{}time} \PY{o}{=} \PY{l+m+mi}{0}
+         
+         \PY{n}{dimension\PYZus{}list} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{50}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{lambda\PYZus{}value\PYZus{}list} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{,} \PY{l+m+mf}{0.05}\PY{p}{,} \PY{l+m+mf}{0.005}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{5}\PY{o}{*}\PY{n+nb}{len}\PY{p}{(}\PY{n}{dimension\PYZus{}list}\PY{p}{)}\PY{o}{+}\PY{l+m+mf}{3.5}\PY{p}{,}\PY{p}{(}\PY{l+m+mi}{5}\PY{o}{*}\PY{n+nb}{len}\PY{p}{(}\PY{n}{lambda\PYZus{}value\PYZus{}list}\PY{p}{)}\PY{o}{+}\PY{l+m+mf}{3.5}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{train\PYZus{}error} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+m+mi}{10}\PY{p}{:} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{50}\PY{p}{:} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{:} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{:} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{\PYZcb{}}
+         
+         \PY{n}{x\PYZus{}train\PYZus{}tmp} \PY{o}{=} \PY{n}{X\PYZus{}train}\PY{p}{[}\PY{p}{:}\PY{p}{]}
+         \PY{n}{x\PYZus{}test\PYZus{}tmp} \PY{o}{=} \PY{n}{X\PYZus{}test}\PY{p}{[}\PY{p}{:}\PY{p}{]}
+         \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{dimension\PYZus{}list}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+             \PY{n}{dimension} \PY{o}{=} \PY{n}{dimension\PYZus{}list}\PY{p}{[}\PY{n}{j}\PY{p}{]}
+             \PY{k}{if} \PY{n}{dimension} \PY{o}{!=} \PY{l+m+mi}{0}\PY{p}{:}
+                 \PY{n}{M} \PY{o}{=} \PY{n}{GetMainVector}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{dimension}\PY{p}{)}
+                 \PY{n}{X\PYZus{}train} \PY{o}{=} \PY{n}{X\PYZus{}train} \PY{o}{@} \PY{n}{M}
+                 \PY{n}{X\PYZus{}test} \PY{o}{=} \PY{n}{X\PYZus{}test} \PY{o}{@} \PY{n}{M}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{lambda\PYZus{}value\PYZus{}list}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                 \PY{c+c1}{\PYZsh{}for 10 times}
+                 \PY{n}{running\PYZus{}time} \PY{o}{=} \PY{l+m+mi}{0}
+                 \PY{n}{total\PYZus{}training\PYZus{}errors} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{train\PYZus{}iter}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}
+                 \PY{n}{total\PYZus{}test\PYZus{}errors} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{train\PYZus{}iter}\PY{o}{/}\PY{o}{/}\PY{l+m+mi}{100}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}
+         
+                 \PY{k}{for} \PY{n}{\PYZus{}} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{trial\PYZus{}times}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{running\PYZus{}start} \PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{clock}\PY{p}{(}\PY{p}{)}
+                     \PY{n}{training\PYZus{}errors}\PY{p}{,} \PY{n}{test\PYZus{}errors} \PY{o}{=} \PY{n}{SGDTrain}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{l+m+mf}{0.0005}\PY{p}{,} \PY{n}{train\PYZus{}iter}\PY{p}{,}\PYZbs{}
+                                                              \PY{n}{NormMSELoss}\PY{p}{,} \PY{n}{batch\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{evaluate} \PY{o}{=} \PY{k+kc}{True}\PY{p}{,} \PY{n}{lambda\PYZus{}value} \PY{o}{=} \PY{n}{lambda\PYZus{}value\PYZus{}list}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+                     \PY{n}{running\PYZus{}time} \PY{o}{+}\PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{clock}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{running\PYZus{}start}
+                     \PY{n}{total\PYZus{}training\PYZus{}errors} \PY{o}{+}\PY{o}{=} \PY{n}{training\PYZus{}errors}
+                     \PY{n}{total\PYZus{}test\PYZus{}errors} \PY{o}{+}\PY{o}{=} \PY{n}{test\PYZus{}errors}
+         
+                 \PY{n}{total\PYZus{}running\PYZus{}time} \PY{o}{+}\PY{o}{=} \PY{n}{running\PYZus{}time} \PY{o}{/} \PY{n}{trial\PYZus{}times}
+         
+                 \PY{n}{x\PYZus{}index1} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{train\PYZus{}iter}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+                 \PY{n}{x\PYZus{}index2} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{train\PYZus{}iter}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{)}
+         
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{,}\PY{n}{j}\PY{o}{*}\PY{l+m+mi}{5}\PY{o}{+}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lambda value = }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{lambda\PYZus{}value\PYZus{}list}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dimension = }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{dimension\PYZus{}list}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{iteraion}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{normalized error}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x\PYZus{}index1}\PY{p}{,} \PY{n}{total\PYZus{}training\PYZus{}errors}\PY{o}{/}\PY{n}{trial\PYZus{}times}\PY{p}{)}
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x\PYZus{}index2}\PY{p}{,} \PY{n}{total\PYZus{}test\PYZus{}errors}\PY{o}{/}\PY{n}{trial\PYZus{}times}\PY{p}{)}
+                 \PY{c+c1}{\PYZsh{} print(\PYZdq{}lambda value: \PYZpc{}lf; dimension: \PYZpc{}d; final testing error: \PYZpc{}lf; final training error: \PYZpc{}lf  \PYZdq{} \PYZpc{} (lambda\PYZus{}value\PYZus{}list[i], dimension\PYZus{}list[j], total\PYZus{}test\PYZus{}errors[\PYZhy{}1]/trial\PYZus{}times, total\PYZus{}training\PYZus{}errors[\PYZhy{}1]/trial\PYZus{}times))}
+                 
+                 \PY{n}{train\PYZus{}error}\PY{p}{[}\PY{n}{dimension}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{total\PYZus{}test\PYZus{}errors}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{/}\PY{n}{trial\PYZus{}times}
+                 
+                 \PY{c+c1}{\PYZsh{}draw base line}
+                 \PY{k}{global} \PY{n}{training\PYZus{}error\PYZus{}base}\PY{p}{,} \PY{n}{test\PYZus{}error\PYZus{}base}
+         
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x\PYZus{}index1}\PY{p}{,} \PY{n}{training\PYZus{}error\PYZus{}base1} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{x\PYZus{}index1}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{training error}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{test error}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{training error baseline}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PYZbs{}
+                           \PY{n}{bbox\PYZus{}to\PYZus{}anchor} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.2}\PY{p}{)}\PY{p}{,} \PY{n}{loc} \PY{o}{=} \PY{l+m+mi}{3}\PY{p}{,} \PY{n}{ncol} \PY{o}{=} \PY{l+m+mi}{2}\PY{p}{)}
+         
+             \PY{n}{X\PYZus{}train} \PY{o}{=} \PY{n}{x\PYZus{}train\PYZus{}tmp}
+             \PY{n}{X\PYZus{}test} \PY{o}{=} \PY{n}{x\PYZus{}test\PYZus{}tmp}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+         \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lambda}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{n}{lambda\PYZus{}value\PYZus{}list}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dimension 10}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{n}{train\PYZus{}error}\PY{p}{[}\PY{l+m+mi}{10}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dimension 50}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{n}{train\PYZus{}error}\PY{p}{[}\PY{l+m+mi}{50}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dimension 100}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{n}{train\PYZus{}error}\PY{p}{[}\PY{l+m+mi}{100}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Without dimension reduction}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{n}{train\PYZus{}error}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{base error}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}\PY{o}{*}\PY{n}{training\PYZus{}error\PYZus{}base1}\PY{p}{\PYZcb{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{average running time =}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{total\PYZus{}running\PYZus{}time} \PY{o}{/} \PY{n+nb}{len}\PY{p}{(}\PY{n}{dimension\PYZus{}list}\PY{p}{)} \PY{o}{/} \PY{n+nb}{len}\PY{p}{(}\PY{n}{lambda\PYZus{}value\PYZus{}list}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{s}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_52_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+average running time = 6.408483675733324 s
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{n}{df}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}26}]:}    lambda  dimension 10  dimension 50  dimension 100  \textbackslash{}
+         0   5.000      0.993997      0.937611       0.881113   
+         1   0.500      0.993640      0.891467       0.708864   
+         2   0.050      0.992536      0.888889       0.664614   
+         3   0.005      0.992089      0.888290       0.671951   
+         4   0.000      0.992546      0.888391       0.688467   
+         
+            Without dimension reduction  base error  
+         0                     0.887913    0.037775  
+         1                     0.704320    0.037775  
+         2                     0.660072    0.037775  
+         3                     0.658717    0.037775  
+         4                     0.658707    0.037775  
+\end{Verbatim}
+            
+     We attempt to improve generalization ability by using PCA to reduce
+dimension of X. From the experiment before, we fix batch size as 10 and
+learning rate at 0.0005. Testing the parameters
+\(\lambda \in {0, 0.005, 0.05, 0.5, 5}\) and
+\(dimension after reduce \in {10, 50, 100, 0}\), 0 means not to reduce
+the dimension. \\
+From the output of testing above, we can see that when we reduce the
+dimension to 100, the testing error is similar to the one without
+dimension reduction. When the training error less than baseline, there
+is overfitting absoulutely. For these reasons, we choose reduced
+dimension as 100 and lambda value as 0.05, which has the lowest but
+higher traning error than the baseline error. 
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
