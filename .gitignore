@@ -1,0 +1,13 @@
+#python
+*.py[cod]
+*.so
+*.egg
+*.egg-info
+*.npy
+#jupyter
+.ipynb_checkpoints
+#dataset
+*.csv
+*.zip
+#pytorch
+*.pth
