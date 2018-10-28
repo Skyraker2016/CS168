@@ -5,7 +5,7 @@
 *.egg-info
 *.npy
 #jupyter
-.ipynb_checkpoints
+*/.ipynb_checkpoints/*
 #dataset
 *.csv
 *.zip
