@@ -12,6 +12,5 @@
 */*.txt
 */*.gif
 */*.png
-*/*.pdf
 #pytorch
 */*.pth
