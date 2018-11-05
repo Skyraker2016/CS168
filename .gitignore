@@ -1,16 +1,21 @@
 #python
+<<<<<<< HEAD
 */*.py[cod]
 */*.so
 */*.egg
 */*.egg-info
-#*.npy
+*/*.npy
+=======
+*.py[cod]
+*.so
+*.egg
+*.egg-info
+*.npy
+>>>>>>> parent of 690eaaf... begin miniproject 5
 #jupyter
 */.ipynb_checkpoints/*
 #dataset
-*/*.csv
-*/*.zip
-*/*.txt
-*/*.gif
-*/*.png
+*.csv
+*.zip
 #pytorch
-*/*.pth
+*.pth
